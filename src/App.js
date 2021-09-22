@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/header";
+import Toolbar from "./components/toolbar";
+import NotesList from "./components/notesList";
+import NewNote from "./components/newNote";
+import CreateANoteBtn from "./components/createNoteBtn";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [showNewNote, setShowNewNote] = useState(false);
+
+  const handleChange = () => {
+    setShowNewNote(!showNewNote);
+  };
+
+  if (showNewNote) {
+    return (
+      <div>
+        <Header />
+        <NewNote handleChange={handleChange} />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Header />
+        <Toolbar />
+        <NotesList />
+        <CreateANoteBtn handleChange={handleChange} />
+      </div>
+    );
+  }
 }
 
 export default App;
